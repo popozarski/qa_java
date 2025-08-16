@@ -1,5 +1,3 @@
-package catTests;
-
 import com.example.Cat;
 import com.example.Feline;
 import org.junit.Before;
