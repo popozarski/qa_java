@@ -5,43 +5,52 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.mockito.Mock;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 @RunWith(Parameterized.class)
 public class LionConstructorTestParametrized {
-    private String sex;
-    private Boolean expected;
-    private Object exception;
-    private Object exceptionMessage;
-    @Mock
-    Feline feline;
+    private final String sex;
+    private final Boolean expected;
+    private final Class<?> exception;
+    private final String exceptionMessage;
 
-    public LionConstructorTestParametrized(String sex, Boolean expected, Object exception, Object exceptionMessage){
+    @Mock
+    private Feline feline;
+
+    public LionConstructorTestParametrized(String sex, Boolean expected, Class<?> exception, String exceptionMessage) {
         this.sex = sex;
         this.expected = expected;
         this.exception = exception;
         this.exceptionMessage = exceptionMessage;
-
     }
 
     @Parameterized.Parameters
-    public static Object[][] getLionSexInfo(){
+    public static Object[][] getLionSexInfo() {
         return new Object[][] {
                 {"Самец", true, null, null},
                 {"Самка", false, null, null},
-                {"Гермафродит", null, new Exception(), "Используйте допустимые значения пола животного - самец или самка"}
+                {"Гермафродит", null, Exception.class, "Используйте допустимые значения пола животного - самец или самка"},
+                {null, null, Exception.class, "Используйте допустимые значения пола животного - самец или самка"} // Добавлен null
         };
     }
 
     @Test
-    public void testLionConstructorSexParameter() throws Exception {
-        try {
-            Lion lion = new Lion(feline, sex);
-            assertEquals(expected, lion.doesHaveMane());
-        }
-        catch (Exception e){
-            assertEquals(exception.getClass(), e.getClass());
-            assertEquals(exceptionMessage, e.getMessage());
+    public void testLionConstructorSexParameter() {
+        if (exception != null) {
+            try {
+                new Lion(feline, sex);
+                fail("Ожидалось исключение");
+            } catch (Exception e) {
+                assertEquals(exception, e.getClass());
+                assertEquals(exceptionMessage, e.getMessage());
+            }
+        } else {
+            try {
+                Lion lion = new Lion(feline, sex);
+                assertEquals(expected, lion.doesHaveMane());
+            } catch (Exception e) {
+                fail("Неожиданное исключение: " + e.getMessage());
+            }
         }
     }
 }

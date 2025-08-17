@@ -18,6 +18,14 @@ public class LionTests {
 
 
     @Test
+    public void lionConstructorWithNullSexShouldThrowException() {
+        Exception exception = assertThrows(Exception.class, () -> {
+            new Lion(feline, null);
+        });
+        assertEquals("Используйте допустимые значения пола животного - самец или самка", exception.getMessage());
+    }
+
+    @Test
     public void getKittensShouldInvokeFelineGetKittens() throws Exception {
         Lion lion = new Lion(feline, "Самец");
         lion.getKittens();
