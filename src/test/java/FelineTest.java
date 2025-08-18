@@ -19,8 +19,6 @@ public class FelineTest {
     private Feline feline;
 
     Animal animal;
-    @Spy
-    Feline spyFeline;
 
     @Before
     public void setUp(){
@@ -38,8 +36,8 @@ public class FelineTest {
 
     @Test
     public void testEatMeatCallsGetFood() throws Exception {
-        spyFeline.eatMeat();
-        Mockito.verify(spyFeline).getFood("Хищник");
+        feline.eatMeat();
+        Mockito.verify(feline).getFood("Хищник");
     }
 
 
