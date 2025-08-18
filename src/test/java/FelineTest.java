@@ -17,7 +17,7 @@ import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 public class FelineTest {
     private Feline feline;
-    @Spy
+
     Animal animal;
     @Spy
     Feline spyFeline;
