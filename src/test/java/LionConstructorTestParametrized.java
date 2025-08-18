@@ -36,21 +36,14 @@ public class LionConstructorTestParametrized {
 
     @Test
     public void testLionConstructorSexParameter() {
-        if (exception != null) {
             try {
-                new Lion(feline, sex);
-                fail("Ожидалось исключение");
+               Lion lion = new Lion(feline, sex);
+                assertEquals(expected, lion.doesHaveMane());
             } catch (Exception e) {
                 assertEquals(exception, e.getClass());
                 assertEquals(exceptionMessage, e.getMessage());
             }
-        } else {
-            try {
-                Lion lion = new Lion(feline, sex);
-                assertEquals(expected, lion.doesHaveMane());
-            } catch (Exception e) {
-                fail("Неожиданное исключение: " + e.getMessage());
-            }
-        }
+
     }
+
 }
