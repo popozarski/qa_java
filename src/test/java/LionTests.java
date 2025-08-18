@@ -34,9 +34,9 @@ public class LionTests {
 
     @Test
     public void getKittensShouldReturnValueFromFeline() throws Exception {
-        when(feline.getKittens()).thenReturn(5);
+        when(feline.getKittens()).thenReturn(1);
         Lion lion = new Lion(feline, "Самка");
-        assertEquals(5, lion.getKittens());
+        assertEquals(1, lion.getKittens());
     }
 
     @Test
