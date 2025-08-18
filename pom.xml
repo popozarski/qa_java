@@ -42,7 +42,6 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                     <fork>true</fork>
-                    <executable>"C:\Program Files\Amazon Corretto\jdk11.0.26_4\bin\javac"</executable>
                 </configuration>
             </plugin>
 
