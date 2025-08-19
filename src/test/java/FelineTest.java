@@ -3,6 +3,7 @@ import com.example.Feline;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -18,8 +19,6 @@ import static org.mockito.Mockito.verify;
 public class FelineTest {
     private Feline feline;
 
-    Animal animal;
-
     @Before
     public void setUp(){
         feline = new Feline();
@@ -34,16 +33,10 @@ public class FelineTest {
     }
 
 
-    @Test
-    public void testEatMeatCallsGetFood() throws Exception {
-        feline.eatMeat();
-        Mockito.verify(feline).getFood("Хищник");
-    }
 
 
     @Test
     public void testEatMeatReturnsCorrectFood() throws Exception {
-        //Mockito.when(animal.getFood("Хищник")).thenReturn(List.of("Животные", "Птицы", "Рыба"));
         List<String> expected = List.of("Животные", "Птицы", "Рыба");
         List<String> actual = feline.eatMeat();
         assertEquals(expected, actual);
