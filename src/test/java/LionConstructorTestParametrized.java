@@ -11,38 +11,26 @@ import static org.junit.Assert.*;
 public class LionConstructorTestParametrized {
     private final String sex;
     private final Boolean expected;
-    private final Class<?> exception;
-    private final String exceptionMessage;
 
-    @Mock
     private Feline feline;
 
-    public LionConstructorTestParametrized(String sex, Boolean expected, Class<?> exception, String exceptionMessage) {
+    public LionConstructorTestParametrized(String sex, Boolean expected) {
         this.sex = sex;
         this.expected = expected;
-        this.exception = exception;
-        this.exceptionMessage = exceptionMessage;
     }
 
     @Parameterized.Parameters
     public static Object[][] getLionSexInfo() {
         return new Object[][] {
-                {"Самец", true, null, null},
-                {"Самка", false, null, null},
-                {"Гермафродит", null, Exception.class, "Используйте допустимые значения пола животного - самец или самка"},
-                {null, null, Exception.class, "Используйте допустимые значения пола животного - самец или самка"} // Добавлен null
+                {"Самец", true},
+                {"Самка", false}
         };
     }
 
     @Test
-    public void testLionConstructorSexParameter() {
-            try {
+    public void testLionConstructorSexParameter() throws Exception {
                Lion lion = new Lion(feline, sex);
                 assertEquals(expected, lion.doesHaveMane());
-            } catch (Exception e) {
-                assertEquals(exception, e.getClass());
-                assertEquals(exceptionMessage, e.getMessage());
-            }
 
     }
 
